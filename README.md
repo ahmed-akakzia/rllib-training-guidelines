@@ -31,6 +31,8 @@ To accomplish this mission, you will need to **customize many components in RLli
 
 ### Notes: 
 
+no gymnasium robotics in pyproject yaml. 
+
 Setup gymnasium robotics: export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/a-akakzia/.mujoco/mujoco210/bin
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/nvidia

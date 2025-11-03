@@ -4,8 +4,8 @@ defaults:
   - _self_
 
 _target_: config_factory.config_basemodels.rollout_config_basemodel.RolloutConfigBaseModel
-rollout_unit: episodes # Can either be episodes, steps or time (in seconds)
-rollout_unit_value: 1 # Number of rollout units to perform. 
+rollout_unit: steps # Can either be episodes, steps or time (in seconds)
+rollout_unit_value: 5 # Number of rollout units to perform. 
 logging_level: INFO # Logging level, to choose from INFO, DEBUG, WARNING, ERROR, CRITICAL
 
 hydra:

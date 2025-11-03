@@ -1,5 +1,5 @@
 [project]
-name = "rllib-training"
+name = "rllib-training-guidelines"
 version = "0.1.0"
 description = "Reinforcement learning project"
 readme = "README.md"
@@ -9,23 +9,18 @@ dependencies = [
     "pydantic>=2.10.6",
     "hydra-core>=1.3.2",
     # Deep Learning Framework
-
     "torch>=2.6.0",
     "torchvision>=0.23.0",
-
     # RL Framework
-
     "ray[rllib]>=2.44.1",
-    "gymnasium>=1.0.0",
-
+    "gymnasium[mujoco]==1.1.1",
     # Experiment Tracking
-
     "neptune>=1.14.0",
-
     # Additional utilities
     "click>=8.2.0",
     "python-dotenv>=0.5.2",
     "plotly>=6.0.1",
+    "pettingzoo>=1.25.0",
 ]
 
 [build-system]

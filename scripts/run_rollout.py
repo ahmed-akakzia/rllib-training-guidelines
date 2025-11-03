@@ -3,7 +3,9 @@
 import logging
 import random
 
-from base_env.env import DiscreteGoalReach1D
+from gymnasium.wrappers import TimeLimit
+from gymnasium_robotics.envs.fetch.reach import MujocoFetchReachEnv
+
 from config_factory import load_and_instantiate_hydra_config
 
 
@@ -15,28 +17,27 @@ def run_rollout():
 
     logger.info("Starting rollout execution...")
 
-    env = DiscreteGoalReach1D(config.environment)
-    env.reset()
+    env = TimeLimit(MujocoFetchReachEnv(reward_type="sparse", render_mode="human"), max_episode_steps=50)
+
     if config.rollout.rollout_unit == "episodes":
         for _ in range(config.rollout.rollout_unit_value):
             env.reset()
             while True:
-                action = random.choice(config.environment.valid_actions)
-                _, _, done = env.step(action)
-                if done:
+                action = env.action_space.sample()
+                _, _, truncated, terminated, _ = env.step(action)
+                env.render()
+                if truncated or terminated:
                     break
-        logger.info(
-            "Rollout of %s episodes executed successfully", config.rollout.rollout_unit_value
-        )
     elif config.rollout.rollout_unit == "steps":
+        env.reset()
         for _ in range(config.rollout.rollout_unit_value):
-            env.reset()
-            while True:
-                action = random.choice(config.environment.valid_actions)
-                _, _, done = env.step(action)
-                if done:
-                    break
-        logger.info("Rollout of %s steps executed successfully", config.rollout.rollout_unit_value)
+            action = env.action_space.sample()
+            _, _, truncated, terminated, _ = env.step(action)
+            env.render()
+            if truncated or terminated:
+                env.reset()
+
+    logger.info("Successfully executed a rollout of %s %s", config.rollout.rollout_unit_value, config.rollout.rollout_unit)
 
 
 if __name__ == "__main__":
