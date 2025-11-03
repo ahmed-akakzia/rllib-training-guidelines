@@ -1,0 +1,16 @@
+# Configuration for RLlib Training
+# This file contains the base configuration that can be overridden
+
+defaults: 
+  - _self_
+  - environment: env_config.yaml
+  - rollout: rollout_config.yaml
+
+_target_: config_factory.config_basemodels.config_basemodel.ConfigBaseModel
+
+seed: # Random seed to control the environment stochasticity. If not provided, will be randomly generated.
+
+hydra:
+  output_subdir: null
+  run:
+    dir: .

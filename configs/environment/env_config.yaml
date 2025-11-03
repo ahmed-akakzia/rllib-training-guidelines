@@ -1,0 +1,9 @@
+# Environment configuration
+defaults: 
+  - _self_
+
+_target_: config_factory.config_basemodels.env_config_basemodel.EnvConfigBaseModel
+default_max_goal_range: 5
+default_max_steps: 100
+default_start_state: 0
+valid_actions: [0, 1, 2]  # 0: stay still, 1: move left, 2: move right

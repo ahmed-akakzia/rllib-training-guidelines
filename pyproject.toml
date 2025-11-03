@@ -1,7 +1,136 @@
 [project]
-name = "rllib-training-guildelines"
+name = "rllib-training"
 version = "0.1.0"
-description = "RLlib Training Guidelines"
+description = "Reinforcement learning project"
 readme = "README.md"
-requires-python = ">=3.12"
-dependencies = []
+requires-python = "==3.12.*"
+dependencies = [
+    "numpy>=2.1.3",
+    "pydantic>=2.10.6",
+    "hydra-core>=1.3.2",
+    # Deep Learning Framework
+
+    "torch>=2.6.0",
+    "torchvision>=0.23.0",
+
+    # RL Framework
+
+    "ray[rllib]>=2.44.1",
+    "gymnasium>=1.0.0",
+
+    # Experiment Tracking
+
+    "neptune>=1.14.0",
+
+    # Additional utilities
+    "click>=8.2.0",
+    "python-dotenv>=0.5.2",
+    "plotly>=6.0.1",
+]
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+# Mypy configuration
+[tool.mypy]
+ignore_missing_imports = true
+
+# Ruff linting configuration
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+fix = true
+
+[tool.ruff.lint]
+select = [
+    "E", # PEP8 Errors
+    "F", # Pyflakes (Unused imports, undefined names, etc.)
+    "W", # Pycodestyle warnings
+    "C90", # cyclomatic complexity, code complexity warnings
+    "B", # Bugbear (for finding likely bugs and design issues)
+    "Q", # Quilty (for checking quality issues in code)
+    "S", # Security issues (e.g., Bandit checks)
+    "I", # Import ordering (consistent import orders)
+    "PT", # Pytest specific checks (if you are using pytest)
+    "D", # Docstring conventions (ensures proper docstring formatting)
+    "N", # Naming conventions (ensures consistent naming conventions)
+    "D", # Docstring conventions (ensures proper docstring formatting)
+]
+ignore = [
+    "E501", # Line too long: enforced by ruff-format, don't check again
+    "E203", # Whitespace before ':' (black compatibility)
+    "D104", # Missing docstring in public package
+    "D100", # Missing docstring in public package
+    "D107", # Missing docstring in `__init__`
+    "D211", # No blank lines allowed before class docstring
+    "PT011", # Ignore pytest exception too broad
+    "S101", # Ignore Bandit checks for use of assert
+    "S311", # Ignore predictable pseudo-random generators 
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+# pytest configuration
+[tool.pytest.ini_options]
+minversion = "8.1"
+testpaths = ["tests"] # To speed up test collection.
+python_files = "test_*.py" # To speed up test collection.
+pythonpath = [".",
+    "src",
+    "scripts",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["D"] # Ignore docstring for tests.
+
+[tool.ruff.lint.isort]
+known-local-folder = ["scripts"]
+
+[tool.pylint]
+ignore = "tests"
+
+[tool.pylint.messages_control]
+max-line-length = 100
+max-public-methods = 24
+disable = [
+    "missing-module-docstring",
+    "too-few-public-methods",
+    "too-many-positional-arguments",
+    "fixme",
+    "line-too-long",
+    "import-error",
+]
+
+[tool.pylint.design]
+max-attributes = 12
+max-args = 12
+max-positional-arguments = 12
+
+[tool.uv]
+dev-dependencies = [
+    "pre-commit>=4.3.0",
+    "pytest>=8.3.5",
+    "pytest-cov>=6.0.0",
+    "pytest-dotenv>=0.5.2",
+    "pytest-mock>=3.14.0",
+    "pytest-xdist>=3.6.1",
+    "ruff>=0.14.0",
+    "pre-commit-hooks>=5.0.0",
+    "mypy>=1.18.2",
+    "conventional-pre-commit>=4.0.0",
+    "pylint>=4.0.0",
+    "ipython>=8.34.0",
+    "isort>=6.0.1",
+    "pytest-order>=1.3.0",
+]
