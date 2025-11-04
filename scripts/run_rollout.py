@@ -17,7 +17,12 @@ def run_rollout():
 
     logger.info("Starting rollout execution...")
 
-    env = TimeLimit(MujocoFetchReachEnv(reward_type="sparse", render_mode="human"), max_episode_steps=50)
+    env = TimeLimit(
+        MujocoFetchReachEnv(
+            reward_type=config.environment.reward_type, 
+            render_mode=config.environment.render_mode
+        )
+    , max_episode_steps=config.environment.max_episode_steps)
 
     if config.rollout.rollout_unit == "episodes":
         for _ in range(config.rollout.rollout_unit_value):

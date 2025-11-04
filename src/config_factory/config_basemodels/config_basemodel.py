@@ -25,9 +25,3 @@ class ConfigBaseModel(BaseModel):
             logger.info("No seed provided, generating a random seed.")
             return random.randint(0, 1000000)
         return seed
-
-    @model_validator(mode="after")
-    def set_environment_seed(self) -> "ConfigBaseModel":
-        """Set the seed for the environment."""
-        self.environment.seed = self.seed
-        return self
