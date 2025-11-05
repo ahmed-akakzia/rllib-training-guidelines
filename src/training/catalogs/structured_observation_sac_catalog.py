@@ -7,6 +7,7 @@ from ray.rllib.algorithms.sac.sac_catalog import SACCatalog
 
 
 class StructuredObservationSACCatalog(SACCatalog):
+    """Structured observation SAC catalog."""
     @classmethod
     def _get_encoder_config(
         cls,
@@ -14,6 +15,7 @@ class StructuredObservationSACCatalog(SACCatalog):
         model_config_dict: dict,
         action_space: gym.Space = None,
     ) -> ModelConfig:
+        """Get the encoder configuration."""
         if (
             isinstance(observation_space, gym.spaces.Dict)
         ):
@@ -25,7 +27,7 @@ class StructuredObservationSACCatalog(SACCatalog):
             hidden_layer_dims = model_config_dict["fcnet_hiddens"][:-1]
             encoder_latent_dim = model_config_dict["fcnet_hiddens"][-1]
             encoder_config: ModelConfig = MLPEncoderConfig(
-                input_dims=(aggregated_shape,), # TODO: Refine
+                input_dims=(aggregated_shape,),
                 hidden_layer_dims=hidden_layer_dims,
                 hidden_layer_activation=model_config_dict["fcnet_activation"],
                 hidden_layer_weights_initializer=model_config_dict[
@@ -60,7 +62,7 @@ class StructuredObservationSACCatalog(SACCatalog):
             return super()._get_encoder_config(observation_space, model_config_dict, action_space)
     
     def build_qf_encoder(self, framework: str) -> Encoder:
-        """Todo"""
+        """Build the Q-function encoder."""
         # Compute the required dimension for the action space.
         if isinstance(self.action_space, gym.spaces.Box):
             required_action_dim = self.action_space.shape[0]
