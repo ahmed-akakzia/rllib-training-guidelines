@@ -20,6 +20,5 @@ def run_training():
     ray.shutdown()
 
 
-
 if __name__ == "__main__":
     run_training()

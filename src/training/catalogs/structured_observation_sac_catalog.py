@@ -7,7 +7,10 @@ from ray.rllib.algorithms.sac.sac_catalog import SACCatalog
 
 
 class StructuredObservationSACCatalog(SACCatalog):
-    """Structured observation SAC catalog."""
+    """Structured observation SAC catalog.
+    
+    This catalog is used to enable RLlib's SAC to handle dictionary observation space."""
+    
     @classmethod
     def _get_encoder_config(
         cls,
