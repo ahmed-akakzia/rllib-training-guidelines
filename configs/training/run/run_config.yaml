@@ -1,0 +1,15 @@
+# Run time configuration 
+
+defaults: 
+  - _self_
+
+_target_: config_factory.config_basemodels.run_config_basemodel.RunConfigBaseModel
+
+name: rllib-training
+
+stop: 
+  training_iteration: 10 
+
+checkpoint_config:
+  checkpoint_frequency: 1 
+  checkpoint_at_end: true

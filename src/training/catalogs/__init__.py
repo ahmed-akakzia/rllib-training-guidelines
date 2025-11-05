@@ -1,0 +1,3 @@
+from training.catalogs.structured_observation_sac_catalog import StructuredObservationSACCatalog
+
+__all__ = ["StructuredObservationSACCatalog"]

@@ -4,6 +4,7 @@ defaults:
 
 _target_: config_factory.config_basemodels.env_config_basemodel.EnvConfigBaseModel
 
+name: TruncatedFetchReachEnv
 max_episode_steps: 50
 render_mode: "human"
 reward_type: dense

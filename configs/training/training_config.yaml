@@ -1,0 +1,15 @@
+# Training configuration
+defaults: 
+  - _self_
+  - param_space: sac_config 
+  - run: run_config 
+
+_target_: config_factory.config_basemodels.training_config_basemodel.TrainingConfigBaseModel
+
+trainable: SAC
+local_mode: false
+
+hydra:
+  output_subdir: null
+  run:
+    dir: .

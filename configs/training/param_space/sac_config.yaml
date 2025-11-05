@@ -1,0 +1,31 @@
+defaults:
+  - _self_
+  - ../../environment/env_config.yaml@environment
+
+_target_: config_factory.config_basemodels.sac_config_basemodel.SACConfigBaseModel
+
+
+env_runners: 
+  num_env_runners: 1
+  rollout_fragment_length: auto
+
+training: 
+  actor_lr: 0.01
+  critic_lr: 0.01
+  alpha_lr: 0.01
+  initial_alpha: 0.5
+  gamma: 0.99 
+  tau: 0.005
+  train_batch_size_per_learner: 128
+  target_network_update_freq: 2 
+
+reporting: 
+  min_sample_timesteps_per_iteration: 500
+
+evaluation: 
+  evaluation_config: 
+    explore: false 
+  evaluation_num_env_runners: 1 
+  evaluation_duration: 5
+  evaluation_interval: 1 
+  evaluation_duration_unit: episodes 

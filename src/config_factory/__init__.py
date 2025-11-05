@@ -1,5 +1,6 @@
 from pathlib import Path
 
+from config_factory.config_basemodels.training_config_basemodel import TrainingConfigBaseModel
 import hydra
 from config_factory.config_basemodels.config_basemodel import ConfigBaseModel
 from hydra import compose, initialize_config_dir
@@ -18,7 +19,7 @@ def get_root_path() -> Path:
 
 def load_and_instantiate_hydra_config(
     config_path: Path | None = None, config_name: str = "config"
-) -> ConfigBaseModel:
+) -> ConfigBaseModel | TrainingConfigBaseModel:
     """Load and instantiate a hydra config."""
     if config_path is None:
         config_path = get_root_path() / "configs"
